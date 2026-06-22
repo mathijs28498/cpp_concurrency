@@ -1,0 +1,10 @@
+# CMake build directories
+build/
+out/
+.cmake/
+
+# VS Code specific settings
+.vscode/
+
+# Compiled executables
+ArmPrep
