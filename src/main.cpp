@@ -1,13 +1,11 @@
-#include <atomic>
 #include <iostream>
-#include <new>
 #include <thread>
 #include <vector>
 
 #include <spsc_queue.hpp>
+#include <thread_pool.hpp>
 
-
-int main() {
+void test_spsc_queue() {
     spsc_queue::SPSCQueue<int, 1024> queue;
 
     std::thread producer([&]() {
@@ -36,5 +34,19 @@ int main() {
 
     producer.join();
     consumer.join();
+}
+
+void test_thread_pool() {
+    unsigned int available_cpu_cores = thread_pool::get_available_cpu_cores();
+    printf("available cpu cores: %u\n", available_cpu_cores);
+
+    thread_pool::ThreadPool tp =
+        thread_pool::ThreadPool(available_cpu_cores - 1);
+    (void)tp.init();
+}
+
+int main() {
+    // test_spsc_queue();
+    test_thread_pool();
     return 0;
 }

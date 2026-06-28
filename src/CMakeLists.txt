@@ -6,4 +6,5 @@ target_compile_options(MainApp PRIVATE -Wall -Wextra -Wpedantic -Werror -Wdeprec
 target_link_libraries(MainApp
     PRIVATE
     SPSCQueue
+    ThreadPool
 )
