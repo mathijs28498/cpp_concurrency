@@ -1,2 +1,3 @@
 add_subdirectory(spsc_queue)
+add_subdirectory(spmc_queue)
 add_subdirectory(thread_pool)

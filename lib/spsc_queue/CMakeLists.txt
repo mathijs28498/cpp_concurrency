@@ -1,9 +1,12 @@
 add_library(SPSCQueue INTERFACE)
 
 target_sources(SPSCQueue
-    PUBLIC
+    INTERFACE
     FILE_SET HEADERS
 )
 
-set_property(TARGET SPSCQueue PROPERTY COMPILE_WARNING_AS_ERROR ON)
-# target_compile_options(SPSCQueue PRIVATE -Wall -Wextra -Wpedantic -Werror -Wdeprecated-copy-dtor)
+if(NOT DEFINED L1_CACHE_LINE_SIZE)
+    set(L1_CACHE_LINE_SIZE "64")
+endif()
+
+target_compile_definitions(SPSCQueue INTERFACE "L1_CACHE_LINE_SIZE=${L1_CACHE_LINE_SIZE}")

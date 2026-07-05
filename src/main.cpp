@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -40,9 +41,18 @@ void test_thread_pool() {
     unsigned int available_cpu_cores = thread_pool::get_available_cpu_cores();
     printf("available cpu cores: %u\n", available_cpu_cores);
 
-    thread_pool::ThreadPool tp =
+    thread_pool::ThreadPool thread_pool =
         thread_pool::ThreadPool(available_cpu_cores - 1);
-    (void)tp.init();
+    (void)thread_pool.init();
+
+    while (true) {
+        (void)thread_pool.submit_task([]() {
+            std::cout << "I'm in a thread: " << std::this_thread::get_id()
+                      << std::endl;
+        });
+        // std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::yield();
+    }
 }
 
 int main() {

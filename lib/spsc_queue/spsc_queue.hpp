@@ -3,22 +3,22 @@
 #include <atomic>
 #include <cstddef>
 
-#define L1_CACHE_LINE_SIZE 64
-
 namespace spsc_queue {
-template <typename T, size_t N> class SPSCQueue {
+template <typename T, std::size_t N> class SPSCQueue {
   private:
-    alignas(L1_CACHE_LINE_SIZE) T items[N];
-    alignas(L1_CACHE_LINE_SIZE) std::atomic<size_t> tail = 0;
-    alignas(L1_CACHE_LINE_SIZE) std::atomic<size_t> head = 0;
+    static constexpr std::size_t CacheLineSize = L1_CACHE_LINE_SIZE;
+
+    alignas(CacheLineSize) T items[N];
+    alignas(CacheLineSize) std::atomic<std::size_t> tail = 0;
+    alignas(CacheLineSize) std::atomic<std::size_t> head = 0;
 
   public:
     SPSCQueue() {}
 
     bool enqueue(const T &item) {
-        size_t currentHead = head.load(std::memory_order::relaxed);
-        size_t currentTail = tail.load(std::memory_order::relaxed);
-        size_t newTail = (currentTail + 1) % N;
+        std::size_t currentHead = head.load(std::memory_order::relaxed);
+        std::size_t currentTail = tail.load(std::memory_order::relaxed);
+        std::size_t newTail = (currentTail + 1) % N;
 
         if (currentHead == newTail) {
             return false;
@@ -31,8 +31,8 @@ template <typename T, size_t N> class SPSCQueue {
     }
 
     bool dequeue(T &item) {
-        size_t currentHead = head.load(std::memory_order::relaxed);
-        size_t currentTail = tail.load(std::memory_order::acquire);
+        std::size_t currentHead = head.load(std::memory_order::relaxed);
+        std::size_t currentTail = tail.load(std::memory_order::acquire);
 
         if (currentHead == currentTail) {
             return false;

@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <spmc_queue.hpp>
 #include <thread>
 
 namespace thread_pool {
@@ -15,15 +16,24 @@ ThreadPool::ThreadPool(unsigned int thread_amount)
 int ThreadPool::init() {
     threads.reserve(thread_amount);
 
-    auto worker = [](unsigned int thread_idx) {
-        srand(static_cast<unsigned int>(time(nullptr)) + thread_idx);
+    auto *task_queue_ptr = &task_queue;
 
-        auto sleep_duration = std::chrono::milliseconds(500 + (rand() % 2000));
-        std::this_thread::sleep_for(sleep_duration);
-        std::cout << "From worker: " << std::this_thread::get_id()
-                  << " idx: " << thread_idx
-                  << " slept for: " << sleep_duration.count() << "ms"
-                  << std::endl;
+    // TODO: Add a stop condition
+    auto worker = [task_queue_ptr](std::stop_token stop_token,
+                                   unsigned int thread_idx) {
+        (void)thread_idx;
+        std::function<void()> task;
+        while (!stop_token.stop_requested()) {
+            if (task_queue_ptr->dequeue(task)) {
+                if (task) {
+                    task();
+                } else {
+                    printf("Something went terribly wrong!\n");
+                }
+            } else {
+                std::this_thread::yield();
+            }
+        }
     };
 
     for (unsigned int i = 0; i < thread_amount; i++) {
@@ -31,5 +41,9 @@ int ThreadPool::init() {
     }
 
     return 0;
+}
+
+bool ThreadPool::submit_task(std::function<void()> task) {
+    return task_queue.enqueue(std::move(task));
 }
 } // namespace thread_pool
