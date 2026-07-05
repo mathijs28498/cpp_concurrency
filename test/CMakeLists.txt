@@ -11,5 +11,8 @@ target_link_libraries(
     SPMCQueue
 )
 
+set_property(TARGET testing PROPERTY COMPILE_WARNING_AS_ERROR ON)
+target_compile_options(testing PRIVATE -Wall -Wextra -Wpedantic -Werror -Wdeprecated-copy-dtor)
+
 include(GoogleTest)
 gtest_discover_tests(testing)

@@ -1,4 +1,13 @@
-add_executable(MainApp main.cpp)
+add_executable(MainApp) 
+
+target_sources(MainApp
+PRIVATE
+main.cpp
+exec_spsc_queue.cpp
+
+PUBLIC
+FILE_SET HEADERS
+)
 
 set_property(TARGET MainApp PROPERTY COMPILE_WARNING_AS_ERROR ON)
 target_compile_options(MainApp PRIVATE -Wall -Wextra -Wpedantic -Werror -Wdeprecated-copy-dtor)

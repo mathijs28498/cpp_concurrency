@@ -11,8 +11,8 @@ unsigned int get_available_cpu_cores();
 class ThreadPool {
   private:
     unsigned int thread_amount;
-    std::vector<std::jthread> threads;
     spmc_queue::GlobalLockSPMCQueue<std::function<void()>, 1024> task_queue;
+    std::vector<std::jthread> threads;
 
   public:
     ThreadPool(unsigned int thread_amount);

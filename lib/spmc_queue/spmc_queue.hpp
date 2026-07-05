@@ -26,6 +26,8 @@ template <typename ItemType, std::size_t Capacity> class GlobalLockSPMCQueue {
     std::size_t size_unlocked() { return tail - head; }
 
   public:
+    static constexpr std::size_t capacity = Capacity;
+
     GlobalLockSPMCQueue() = default;
 
     GlobalLockSPMCQueue(const GlobalLockSPMCQueue &other) {

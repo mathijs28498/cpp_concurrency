@@ -4,6 +4,13 @@ project(CppConcurrency)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+option(ENABLE_TSAN "Build with ThreadSanitizer" OFF)
+
+if(ENABLE_TSAN)
+    add_compile_options(-fsanitize=thread -g)
+    add_link_options(-fsanitize=thread)
+endif()
+
 include(FetchContent)
 FetchContent_Declare(
     googletest

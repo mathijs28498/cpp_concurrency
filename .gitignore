@@ -1,7 +1,9 @@
 # CMake build directories
 build/
+build-tsan/
 out/
 .cmake/
+output/
 
 # VS Code specific settings
 .vscode/
