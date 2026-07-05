@@ -22,11 +22,11 @@ int ThreadPool::init() {
     auto worker = [task_queue_ptr](std::stop_token stop_token,
                                    unsigned int thread_idx) {
         (void)thread_idx;
-        std::function<void()> task;
+        std::function<void(unsigned int)> task;
         while (!stop_token.stop_requested()) {
             if (task_queue_ptr->dequeue(task)) {
                 if (task) {
-                    task();
+                    task(thread_idx);
                 } else {
                     printf("Something went terribly wrong!\n");
                 }
@@ -43,7 +43,7 @@ int ThreadPool::init() {
     return 0;
 }
 
-bool ThreadPool::submit_task(std::function<void()> task) {
+bool ThreadPool::submit_task(std::function<void(unsigned int)> task) {
     return task_queue.enqueue(std::move(task));
 }
 } // namespace thread_pool

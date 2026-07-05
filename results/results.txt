@@ -1,0 +1,139 @@
+
+Utilizing 16 out of 20 available cores
+testing 'thread pool 32 workgroup size':
+        Testing '00_overview': correct
+        Testing '01_elephant_valley': correct
+        Testing '02_seahorse_valley': correct
+        Testing '03_triple_spiral': correct
+        Testing '04_airplane_island': correct
+        Testing '05_dendrite_island': correct
+        Testing '06_spiral_wheels': correct
+        Testing '07_wheels_within_wheels': correct
+        Testing '08_embedded_julia': correct
+
+Starting benchmark 'thread pool 32 workgroup size'
+
+thread pool 32 workgroup size - 00_overview:
+        median: 61.2206ms
+        min:    46.682ms
+        max:    71.6553ms
+        IQR:    9.43836ms
+
+thread pool 32 workgroup size - 01_elephant_valley:
+        median: 82.7699ms
+        min:    80.4695ms
+        max:    90.6174ms
+        IQR:    1.82ms
+
+thread pool 32 workgroup size - 02_seahorse_valley:
+        median: 60.9669ms
+        min:    56.656ms
+        max:    62.9729ms
+        IQR:    3.11778ms
+
+thread pool 32 workgroup size - 03_triple_spiral:
+        median: 147.049ms
+        min:    141.621ms
+        max:    163.965ms
+        IQR:    6.55877ms
+
+thread pool 32 workgroup size - 04_airplane_island:
+        median: 68.276ms
+        min:    54.4027ms
+        max:    82.1534ms
+        IQR:    4.27413ms
+
+thread pool 32 workgroup size - 05_dendrite_island:
+        median: 112.074ms
+        min:    105.587ms
+        max:    124.635ms
+        IQR:    6.30111ms
+
+thread pool 32 workgroup size - 06_spiral_wheels:
+        median: 35.1583ms
+        min:    28.8977ms
+        max:    46.9987ms
+        IQR:    5.51887ms
+
+thread pool 32 workgroup size - 07_wheels_within_wheels:
+        median: 428.124ms
+        min:    417.506ms
+        max:    447.342ms
+        IQR:    7.04857ms
+
+thread pool 32 workgroup size - 08_embedded_julia:
+        median: 140.085ms
+        min:    133.304ms
+        max:    167.383ms
+        IQR:    6.00901ms
+
+Finished benchmark 'thread pool 32 workgroup size'
+
+testing 'thread pool 1 workgroup per thread':
+        Testing '00_overview': correct
+        Testing '01_elephant_valley': correct
+        Testing '02_seahorse_valley': correct
+        Testing '03_triple_spiral': correct
+        Testing '04_airplane_island': correct
+        Testing '05_dendrite_island': correct
+        Testing '06_spiral_wheels': correct
+        Testing '07_wheels_within_wheels': correct
+        Testing '08_embedded_julia': correct
+
+Starting benchmark 'thread pool 1 workgroup per thread'
+
+thread pool 1 workgroup per thread - 00_overview:
+        median: 35.1969ms
+        min:    28.5677ms
+        max:    44.6553ms
+        IQR:    2.33057ms
+
+thread pool 1 workgroup per thread - 01_elephant_valley:
+        median: 121.947ms
+        min:    113.076ms
+        max:    134.088ms
+        IQR:    6.85893ms
+
+thread pool 1 workgroup per thread - 02_seahorse_valley:
+        median: 83.149ms
+        min:    74.6543ms
+        max:    108.18ms
+        IQR:    5.55623ms
+
+thread pool 1 workgroup per thread - 03_triple_spiral:
+        median: 198.94ms
+        min:    188.375ms
+        max:    219.175ms
+        IQR:    11.4243ms
+
+thread pool 1 workgroup per thread - 04_airplane_island:
+        median: 70.0294ms
+        min:    62.6872ms
+        max:    81.4196ms
+        IQR:    5.31629ms
+
+thread pool 1 workgroup per thread - 05_dendrite_island:
+        median: 160.632ms
+        min:    149.404ms
+        max:    169.305ms
+        IQR:    7.3412ms
+
+thread pool 1 workgroup per thread - 06_spiral_wheels:
+        median: 27.2468ms
+        min:    24.975ms
+        max:    33.0326ms
+        IQR:    2.42496ms
+
+thread pool 1 workgroup per thread - 07_wheels_within_wheels:
+        median: 657.944ms
+        min:    631.392ms
+        max:    722.285ms
+        IQR:    37.7451ms
+
+thread pool 1 workgroup per thread - 08_embedded_julia:
+        median: 151.267ms
+        min:    144.495ms
+        max:    179.347ms
+        IQR:    8.72985ms
+
+Finished benchmark 'thread pool 1 workgroup per thread'
